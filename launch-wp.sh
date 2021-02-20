@@ -37,6 +37,6 @@ crontab -u ${USER} -l | grep -v "${full_path}/ssl-renew.sh"  | crontab -u ${USER
 (crontab -u ${USER} -l; echo "$line" ) | crontab -u ${USER} -
 
 chmod +x backup-site.sh
-line="*/5 * * * * ${full_path}/backup-site.sh >> /var/log/backup-${project_dir}.log 2>&1"
+line="*/5 * * * * ${full_path}/backup-site.sh >> /var/log/cron.log 2>&1"
 crontab -u ${USER} -l | grep -v "${full_path}/backup-site.sh"  | crontab -u ${USER} -
 (crontab -u ${USER} -l; echo "$line" ) | crontab -u ${USER} -
