@@ -10,11 +10,11 @@ $COMPOSE pause
 
 for nv in `docker volume ls -q`
 do
-  if [[ $nv = ${project_dir}* ]]; then
+  if [[ $nv = ${project_dir}_db-data ]] || [[ $nv = ${project_dir}_wp-data ]]; then
     f=${nv//${project_dir}_/}
     echo -n "Backing up $f ..."
     docker run --rm \
-      -v $nv:/data -v ${full_path}/volume-backups:/backup alpine \
+      -v $nv:/data -v ${full_path}/internal/content-backups:/backup alpine \
       tar -cjf /backup/$f.tar.bz2 -C /data ./
     echo "done"
   fi
@@ -22,12 +22,14 @@ done
 
 $COMPOSE unpause
 
+tar_file_name=${project_dir}-backup-"`date +%F`".tar.bz2
+rm ${project_dir}-backup-*.tar.bz2
 cd ..
-tar_file_name=${project_dir}-"`date +%F`".tar.bz2
 tar -cjf $tar_file_name $project_dir
-echo "${project_dir} zipped as ${tar_file_name} in $(dirname $full_path)"
+mv $tar_file_name $project_dir 
+echo "${project_dir} zipped as ${tar_file_name} in ${full_path}"
 echo "to copy to another machine, run the following command from that machine:"
-echo "    scp ${USER:-root}@$(hostname -I | cut -d' ' -f1):$(dirname $full_path)/${tar_file_name} ."
+echo "    scp ${USER:-root}@$(hostname -I | cut -d' ' -f1):${full_path}/${tar_file_name} ."
 echo "and to extract:"
 echo "    tar -xjf ${tar_file_name}"
-echo "more ip addresses: $(hostname -I)"
+#echo "more ip addresses: $(hostname -I)"

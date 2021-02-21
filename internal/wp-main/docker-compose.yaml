@@ -58,7 +58,7 @@ services:
       - certbot-etc:/etc/letsencrypt
       - wp-data:/var/www/html
     #command: certonly --webroot --webroot-path=/var/www/html --email ${EMAIL} --agree-tos --no-eff-email --force-renewal -d ${DOMAIN} -d www.${DOMAIN}
-    command: certonly --webroot --webroot-path=/var/www/html --email ${EMAIL} --agree-tos --no-eff-email --staging -d ${DOMAIN} -d www.${DOMAIN}
+    command: certonly --webroot --webroot-path=/var/www/html --email ${EMAIL} --agree-tos --no-eff-email ${CERTBOT_STAGING} --force-renewal -d ${DOMAIN} -d www.${DOMAIN}
 
 volumes:
   certbot-etc:
