@@ -17,4 +17,4 @@ else
   $COMPOSE run certbot renew && $COMPOSE kill -s SIGHUP webserver
 fi
 $DOCKER system prune -af
-$DOCKER volume prune -f
+#$DOCKER volume prune -f
