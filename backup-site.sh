@@ -33,3 +33,4 @@ echo "    scp ${USER:-root}@$(hostname -I | cut -d' ' -f1):${full_path}/${tar_fi
 echo "and to extract:"
 echo "    tar -xjf ${tar_file_name}"
 #echo "more ip addresses: $(hostname -I)"
+
