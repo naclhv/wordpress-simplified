@@ -20,3 +20,8 @@ To back up or migrate the site:
 - Run `sudo bash backup-site.sh`. This will generate a file, named {directory_name}-backup-{date}.tar.bz2. This file is also generated through the regularly scheduled backups.
 - Copy the file to a different machine, for backup storage or re-deployment. Note that the scheduled backup only generates the file; it is your responsibility to move it off-server.
 
+To update Wordpress, or any other component:
+- Create a backup first in case something breaks.
+- Edit the .env file and change the image version.
+- Run `sudo docker-compose down && sudo docker-compose up -d`
+- For Wordpress, you'll then have to update it manually within its admin dashboard, to update the contents of the docker volume.
