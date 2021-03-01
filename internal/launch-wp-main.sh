@@ -13,3 +13,8 @@ envsubst '${DOMAIN}' < ./configs/nginx-conf/nginx.conf > ./configs/nginx-conf/ng
 mv ./configs/nginx-conf/nginx.conf.tmp ./configs/nginx-conf/nginx.conf
 docker-compose up -d
 
+docker-compose exec db sh -c \
+	"mysql --user=root --password=${MYSQL_ROOT_PASSWORD} ${WORDPRESS_DB_NAME} -e \
+	\"UPDATE wp_options SET option_value = 'https://${DOMAIN}' \
+	WHERE option_name IN ('siteurl', 'home')\""
+
