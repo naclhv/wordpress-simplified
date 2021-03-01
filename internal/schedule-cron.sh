@@ -8,9 +8,9 @@ set -o allexport
 source .env
 set +o allexport
 
-chmod +x internal/ssl-renew.sh
-line="${RENEW_CRONSTR} ${full_path}/internal/ssl-renew.sh >> /var/log/cron.log 2>&1"
-crontab -u ${USER} -l | grep -v "${full_path}/internal/ssl-renew.sh"  | crontab -u ${USER} -
+chmod +x internal/renew-ssl.sh
+line="${RENEW_CRONSTR} ${full_path}/internal/renew-ssl.sh >> /var/log/cron.log 2>&1"
+crontab -u ${USER} -l | grep -v "${full_path}/internal/renew-ssl.sh"  | crontab -u ${USER} -
 (crontab -u ${USER} -l; echo "$line" ) | crontab -u ${USER} -
 
 chmod +x backup-site.sh
