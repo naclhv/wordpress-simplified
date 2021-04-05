@@ -15,7 +15,7 @@ To deploy or re-deploy a site:
 - Git pull the project (for a new site), or extract the backup tar file (for a previous site you want to re-deploy).
 - Create a .env file specific to your site. The .env-example file has been included as a template.
 - Run `sudo bash launch-site`. This will get the SSL certificate, launch the Wordpress site, and schedule regular site backups and SSL renewal.
-- specific plugins, such as oxygen, will need a few extra steps specific to that plugin. You may also need to remap the old domain name to the new domain name in your content.
+- specific plugins, such as Oxygen, will need a few extra steps specific to that plugin. You may also need to remap the old domain name to the new one in your content.
 
 To back up or migrate the site:
 - Run `sudo bash backup-site.sh`. This will generate a file, named {directory_name}-backup-{date}.tar.bz2. This file is also generated through the regularly scheduled backups.
