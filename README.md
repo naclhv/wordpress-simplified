@@ -20,6 +20,7 @@ To deploy or re-deploy a site:
 To back up or migrate the site:
 - Run `sudo bash backup-site.sh`. This will generate a file, named {directory_name}-backup-{date}.tar.bz2. This file is also generated through the regularly scheduled backups.
 - Copy the file to a different machine, for backup storage or re-deployment. Note that the scheduled backup only generates the file; it is your responsibility to move it off-server.
+- Run `grep scp /var/log/cron.log | tail -1` to see the scp command recorded by the cron log. This is the command you need to run on the other machine to copy over the backup.
 
 To update Wordpress, or any other component:
 - Create a backup first in case something breaks.
